@@ -183,7 +183,7 @@ int main(int argc, char *argv[]){
   sw = argv[1];
   if (sw == "--help"){
     cerr<<"\t--bfile      : Binary PLINK format for genotypes."<<endl;
-    //cerr<<"\t--write-W    : Binary PLINK format for genotypes."<<endl;
+    cerr<<"\t--nthreads   : Number of threads to use. Default: uses all thread(s) detected."<<endl;
     cerr<<"\t--out        : Prefix for output file: [prefix].grm.bin. Default is [none]."<<endl;
     exit(1);
   }else{
