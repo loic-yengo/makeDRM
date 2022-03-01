@@ -166,7 +166,9 @@ int main(int argc, char *argv[]){
   // Input arguments
   string bfile       = "none";
   string grmPrefix   = "none";
-  bool verbose       =  true;
+  bool verbose       =   true;
+  int nThreads       =      0; 
+
   //bool writewGRM     = false;
   // Indices
   string sw;
@@ -199,6 +201,10 @@ int main(int argc, char *argv[]){
     if (sw == "--out"){
       grmPrefix = argv[i + 1];
     }
+    if (sw == "--nthreads"){
+      nThreads = atoi(argv[i + 1]);
+    }
+
     //if (sw == "--write-W"){
     //  writewGRM = true;
     //}
@@ -215,8 +221,11 @@ int main(int argc, char *argv[]){
   string famfile = bfile+".fam";
   
   initParallel();
-  int nThreads = nbThreads( );
-
+  if(nThreads==0){
+    nThreads = nbThreads();
+  }
+  setNbThreads(nThreads);
+ 
   clock_t tic = clock();
   time_t t = time(0);   // get time now
   struct tm * now = localtime( & t );
