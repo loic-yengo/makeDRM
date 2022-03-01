@@ -221,8 +221,11 @@ int main(int argc, char *argv[]){
   string famfile = bfile+".fam";
   
   initParallel();
+  int nThreadsDetected = nbThreads();
   if(nThreads==0){
-    nThreads = nbThreads();
+    nThreads = nThreadsDetected;
+  }else{
+    nThreads = min(nThreads, nThreadsDetected);
   }
   setNbThreads(nThreads);
  
@@ -244,7 +247,7 @@ int main(int argc, char *argv[]){
     cout<<"# FAM: "<<bfile<<".fam.\n";
     cout<<"# Output file names: "<<grmPrefix<<".grm.[bin|id]\n";
     cout<<"#                    "<<grmPrefix<<".gpd.grm.[bin|id]\n"; 
-    cout<<"# Using "<<nThreads<<" threads.\n";
+    cout<<"# Using "<<nThreads<<" threads / "<< nThreadsDetected <<" threads detected.\n";
   }
  
   string logFile = grmPrefix+".gpd.grm.log";
